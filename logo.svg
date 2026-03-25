@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 600" width="500" height="600">
+  <defs>
+    <style>
+      .logo-stroke { fill: none; stroke: #f5f0e8; stroke-linecap: round; stroke-linejoin: round; }
+      .logo-fill { fill: #f5f0e8; }
+      .logo-text { fill: #f5f0e8; font-family: 'Arial Black', 'Impact', 'Helvetica Neue', Arial, sans-serif; font-weight: 900; }
+    </style>
+  </defs>
+
+  <!-- ============================================ -->
+  <!-- COLOSSEUM - partial/broken structure          -->
+  <!-- The left side is taller, curves down to right -->
+  <!-- Like viewing it at a 3/4 angle                -->
+  <!-- ============================================ -->
+
+  <!-- Outer wall / silhouette of colosseum -->
+  <!-- Top curved wall - left side rises higher -->
+  <path class="logo-stroke" stroke-width="6" d="
+    M95,255
+    L85,200
+    Q82,170 90,140
+    Q100,100 130,75
+    Q160,55 195,50
+    Q220,47 240,52
+    L245,55
+    Q260,60 265,70
+    L268,80
+    Q275,88 290,95
+    Q320,108 348,128
+    Q378,152 400,190
+    L415,255
+  "/>
+
+  <!-- Inner wall line parallel to outer -->
+  <path class="logo-stroke" stroke-width="3" d="
+    M105,250
+    L98,205
+    Q95,175 102,148
+    Q110,115 135,92
+    Q158,72 190,65
+    Q215,60 235,64
+    Q248,68 255,78
+    Q262,88 278,96
+    Q308,112 338,135
+    Q368,158 390,195
+    L403,250
+  "/>
+
+  <!-- ── TIER 1 (TOP): Small arches on upper-left portion ── -->
+  <!-- This tier is only on the upper-left part of the colosseum -->
+
+  <!-- Top row horizontal ledge -->
+  <line class="logo-stroke" stroke-width="4" x1="100" y1="145" x2="280" y2="108"/>
+  <line class="logo-stroke" stroke-width="2.5" x1="96" y1="152" x2="282" y2="115"/>
+
+  <!-- Small pillars - top row (angled to follow the curve) -->
+  <line class="logo-stroke" stroke-width="2.5" x1="115" y1="85" x2="110" y2="145"/>
+  <line class="logo-stroke" stroke-width="2.5" x1="145" y1="72" x2="138" y2="140"/>
+  <line class="logo-stroke" stroke-width="2.5" x1="175" y1="64" x2="168" y2="135"/>
+  <line class="logo-stroke" stroke-width="2.5" x1="205" y1="60" x2="198" y2="130"/>
+  <line class="logo-stroke" stroke-width="2.5" x1="235" y1="62" x2="230" y2="120"/>
+  <line class="logo-stroke" stroke-width="2.5" x1="260" y1="72" x2="258" y2="114"/>
+
+  <!-- Small arches - top row -->
+  <path class="logo-stroke" stroke-width="2" d="M112,145 Q128,118 140,140"/>
+  <path class="logo-stroke" stroke-width="2" d="M140,140 Q157,112 170,136"/>
+  <path class="logo-stroke" stroke-width="2" d="M170,136 Q187,107 200,131"/>
+  <path class="logo-stroke" stroke-width="2" d="M200,131 Q215,103 232,122"/>
+  <path class="logo-stroke" stroke-width="2" d="M232,122 Q247,100 260,115"/>
+
+  <!-- ── TIER 2 (MIDDLE): Larger arches ── -->
+
+  <!-- Middle row horizontal ledge -->
+  <line class="logo-stroke" stroke-width="4.5" x1="90" y1="210" x2="395" y2="210"/>
+  <line class="logo-stroke" stroke-width="2.5" x1="87" y1="218" x2="398" y2="218"/>
+
+  <!-- Medium pillars -->
+  <line class="logo-stroke" stroke-width="3" x1="100" y1="155" x2="95" y2="210"/>
+  <line class="logo-stroke" stroke-width="3" x1="140" y1="148" x2="132" y2="210"/>
+  <line class="logo-stroke" stroke-width="3" x1="178" y1="142" x2="170" y2="210"/>
+  <line class="logo-stroke" stroke-width="3" x1="215" y1="136" x2="210" y2="210"/>
+  <line class="logo-stroke" stroke-width="3" x1="252" y1="125" x2="250" y2="210"/>
+  <line class="logo-stroke" stroke-width="3" x1="290" y1="120" x2="290" y2="210"/>
+  <line class="logo-stroke" stroke-width="3" x1="330" y1="135" x2="330" y2="210"/>
+  <line class="logo-stroke" stroke-width="3" x1="370" y1="158" x2="370" y2="210"/>
+  <line class="logo-stroke" stroke-width="3" x1="403" y1="185" x2="403" y2="210"/>
+
+  <!-- Medium arches -->
+  <path class="logo-stroke" stroke-width="2.5" d="M97,210 Q118,170 135,210"/>
+  <path class="logo-stroke" stroke-width="2.5" d="M135,210 Q154,168 173,210"/>
+  <path class="logo-stroke" stroke-width="2.5" d="M173,210 Q193,163 213,210"/>
+  <path class="logo-stroke" stroke-width="2.5" d="M213,210 Q233,160 253,210"/>
+  <path class="logo-stroke" stroke-width="2.5" d="M253,210 Q272,165 293,210"/>
+  <path class="logo-stroke" stroke-width="2.5" d="M293,210 Q312,172 333,210"/>
+  <path class="logo-stroke" stroke-width="2.5" d="M333,210 Q352,178 373,210"/>
+  <path class="logo-stroke" stroke-width="2.5" d="M373,210 Q388,186 405,210"/>
+
+  <!-- ── TIER 3 (BOTTOM): Large arches - partially hidden by cup ── -->
+
+  <!-- Bottom base line -->
+  <line class="logo-stroke" stroke-width="5" x1="85" y1="280" x2="420" y2="280"/>
+
+  <!-- Large pillars bottom tier -->
+  <line class="logo-stroke" stroke-width="3" x1="92" y1="220" x2="88" y2="280"/>
+  <line class="logo-stroke" stroke-width="3" x1="138" y1="220" x2="133" y2="280"/>
+  <!-- Remaining bottom pillars hidden behind coffee cup -->
+  <line class="logo-stroke" stroke-width="3" x1="370" y1="220" x2="370" y2="280"/>
+  <line class="logo-stroke" stroke-width="3" x1="410" y1="220" x2="415" y2="280"/>
+
+  <!-- Bottom arches (only sides visible, center hidden by cup) -->
+  <path class="logo-stroke" stroke-width="2.5" d="M90,280 Q115,235 140,280"/>
+  <path class="logo-stroke" stroke-width="2.5" d="M370,280 Q392,240 418,280"/>
+
+
+  <!-- ============================================ -->
+  <!-- COFFEE CUP - centered, overlapping colosseum -->
+  <!-- ============================================ -->
+
+  <!-- Background mask to hide colosseum lines behind cup -->
+  <ellipse cx="255" cy="340" rx="105" ry="20" fill="#0a0a0a" stroke="none"/>
+  <path d="M150,225 L350,225 L335,335 L165,335 Z" fill="#0a0a0a" stroke="none"/>
+
+  <!-- Cup body -->
+  <path class="logo-stroke" stroke-width="5" d="
+    M155,228
+    Q160,285 172,332
+    L332,332
+    Q344,285 349,228
+    Z
+  "/>
+
+  <!-- Cup rim - thick top edge -->
+  <line class="logo-stroke" stroke-width="7" x1="150" y1="228" x2="354" y2="228"/>
+
+  <!-- Saucer -->
+  <ellipse class="logo-stroke" stroke-width="4.5" cx="252" cy="340" rx="110" ry="18" fill="none"/>
+  <ellipse class="logo-stroke" stroke-width="2.5" cx="252" cy="338" rx="88" ry="12" fill="none"/>
+
+  <!-- Cup handle - on the right side -->
+  <path class="logo-stroke" stroke-width="5" d="
+    M349,255
+    C390,250 395,310 349,318
+  "/>
+  <path class="logo-stroke" stroke-width="3" d="
+    M349,268
+    C375,265 378,300 349,306
+  "/>
+
+  <!-- Steam wisps - 3 curving lines rising from cup -->
+  <path class="logo-stroke" stroke-width="4" opacity="0.8" d="
+    M210,225
+    C208,210 220,200 215,185
+    C210,170 222,158 218,142
+  "/>
+  <path class="logo-stroke" stroke-width="4" opacity="0.65" d="
+    M252,222
+    C250,205 262,195 258,178
+    C254,160 266,148 262,130
+  "/>
+  <path class="logo-stroke" stroke-width="4" opacity="0.5" d="
+    M294,225
+    C292,212 302,205 298,192
+    C294,179 304,170 300,158
+  "/>
+
+
+  <!-- ============================================ -->
+  <!-- TEXT: ROAM and COFFEE - perfectly level       -->
+  <!-- ============================================ -->
+
+  <!-- ROAM -->
+  <text class="logo-text" x="250" y="430" text-anchor="middle" font-size="88" letter-spacing="6">ROAM</text>
+
+  <!-- COFFEE -->
+  <text class="logo-text" x="250" y="490" text-anchor="middle" font-size="56" letter-spacing="10">COFFEE</text>
+</svg>

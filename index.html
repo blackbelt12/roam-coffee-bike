@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROAM Coffee Bike</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black: #0a0a0a;
+      --dark: #141414;
+      --dark-card: #1a1a1a;
+      --cream: #f5f0e8;
+      --warm-white: #e8e0d4;
+      --gold: #c9a96e;
+      --gold-light: #d4b87a;
+      --text-muted: #8a8278;
+      --border: #2a2a2a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--black);
+      color: var(--cream);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.4s, backdrop-filter 0.4s, padding 0.4s;
+    }
+
+    nav.scrolled {
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(20px);
+      padding: 0.8rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo-img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    nav.scrolled .nav-logo-img {
+      height: 32px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--cream);
+      margin: 5px 0;
+      transition: all 0.3s;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero-bg {
+      display: none;
+    }
+
+    /* ── Floating Coffee Bean Background ── */
+    .beans-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      padding: 2rem;
+    }
+
+    /* Logo Image */
+    .hero-logo {
+      max-width: 220px;
+      height: auto;
+      margin: 0 auto 2rem;
+      display: block;
+      object-fit: contain;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 400;
+      letter-spacing: 6px;
+      line-height: 1.05;
+      margin-bottom: 2rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .hero h1 .highlight { color: var(--gold); }
+
+    .hero-tagline {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--warm-white);
+      max-width: 420px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.65;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2.5rem;
+      background: var(--gold);
+      color: var(--black);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-radius: 0;
+      transition: all 0.3s;
+    }
+
+    .hero-cta:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201, 169, 110, 0.25);
+    }
+
+    .hero-cta svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.3s;
+    }
+
+    .hero-cta:hover svg { transform: translateX(4px); }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ── Section Styles ── */
+    section {
+      padding: 7rem 2rem;
+      position: relative;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .section-label::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 1.2rem;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      line-height: 1.15;
+      letter-spacing: 1px;
+    }
+
+    .section-text {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      max-width: 560px;
+    }
+
+    .divider {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── About ── */
+    .about {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-image {
+      position: relative;
+      aspect-ratio: 4/5;
+      background: var(--dark-card);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.4), transparent 40%);
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--gold);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 0.25rem;
+    }
+
+    /* ── Menu ── */
+    .menu-section { max-width: 1200px; margin: 0 auto; }
+
+    .menu-section .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .menu-section .section-text {
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .menu-category {
+      background: var(--dark);
+      padding: 3rem;
+    }
+
+    .menu-category-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: var(--cream);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .menu-category-title svg {
+      width: 20px;
+      height: 20px;
+      color: var(--gold);
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .menu-item:last-child { border-bottom: none; }
+
+    .menu-item-name {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--warm-white);
+    }
+
+    .menu-item-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    .menu-item-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--gold);
+      white-space: nowrap;
+      margin-left: 1.5rem;
+    }
+
+    /* ── Events / Book Us ── */
+    .events-section { max-width: 1200px; margin: 0 auto; }
+
+    .events-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .event-types {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .event-card {
+      padding: 2rem;
+      border: 1px solid var(--border);
+      background: var(--dark);
+      transition: all 0.3s;
+    }
+
+    .event-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .event-card-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    .event-card-icon svg { width: 18px; height: 18px; }
+
+    .event-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .event-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── Contact ── */
+    .contact-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 4rem;
+    }
+
+    .contact-item {
+      background: var(--dark);
+      padding: 3rem 2rem;
+      transition: background 0.3s;
+    }
+
+    .contact-item:hover { background: var(--dark-card); }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+    }
+
+    .contact-icon svg { width: 20px; height: 20px; }
+
+    .contact-item h3 {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-item a,
+    .contact-item p {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    .contact-item a:hover { color: var(--gold); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', 'Arial Black', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      letter-spacing: 4px;
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo span { color: var(--gold); }
+
+    .footer-text {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    /* ── Animations ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(20px);
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        z-index: 999;
+      }
+      .nav-links.open a { font-size: 1.1rem; color: var(--cream); }
+      .menu-toggle { display: block; z-index: 1001; }
+      .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      .menu-toggle.open span:nth-child(2) { opacity: 0; }
+      .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+      .about { grid-template-columns: 1fr; gap: 3rem; }
+      .about-image { max-height: 400px; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .events-content { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      section { padding: 5rem 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { letter-spacing: 3px; }
+      .about-stats { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .menu-category { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Coffee Bean Background -->
+  <div class="beans-bg" id="beansBg"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo"><img src="roam-coffee-logo-clean.png" alt="ROAM Coffee" class="nav-logo-img"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about" onclick="closeMenu()">About</a></li>
+      <li><a href="#menu" onclick="closeMenu()">Menu</a></li>
+      <li><a href="#events" onclick="closeMenu()">Book Us</a></li>
+      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+
+      <!-- ROAM COFFEE Logo -->
+      <img src="roam-coffee-logo-clean.png" alt="ROAM Coffee Bike Logo" class="hero-logo">
+      <p class="hero-tagline">Premium mobile coffee, brewed with passion. We bring the cafe experience to your doorstep, event, or celebration.</p>
+      <a href="#events" class="hero-cta">
+        Book Us
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- About -->
+  <section id="about">
+    <div class="about">
+      <div class="about-image fade-up">
+        <img src="IMG_1216.JPEG" alt="ROAM Coffee Bike - Mobile Espresso Bar">
+        <div class="about-image-overlay"></div>
+      </div>
+      <div class="fade-up">
+        <span class="section-label">Our Story</span>
+        <h2 class="section-title">Coffee That Comes<br>to <span style="color:var(--gold);">You</span></h2>
+        <p class="section-text">
+          We ride to your location and serve barista-quality beverages with a smile.
+        </p>
+        <p class="section-text" style="margin-top:1rem;">
+          Whether it's a morning market, a corporate gathering, or a weekend festival, our mobile coffee bike delivers an unforgettable experience, one cup at a time.
+        </p>
+        <div class="about-stats">
+          <div>
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Events Served</div>
+          </div>
+          <div>
+            <div class="stat-number">10K+</div>
+            <div class="stat-label">Happy Customers</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Menu -->
+  <section id="menu">
+    <div class="menu-section">
+      <div class="section-header fade-up">
+        <span class="section-label" style="padding-left:0;">Our Menu</span>
+        <h2 class="section-title" style="text-align:center;">Crafted With Care</h2>
+        <p class="section-text">Every cup is made to order using freshly roasted beans and premium ingredients.</p>
+      </div>
+
+      <div class="menu-grid fade-up">
+        <!-- Espresso Drinks -->
+        <div class="menu-category">
+          <h3 class="menu-category-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8h1a4 4 0 110 8h-1M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8zM6 2v2M10 2v2M14 2v2"/></svg>
+            Espresso Drinks
+          </h3>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Espresso</div><div class="menu-item-desc">Bold single or double shot</div></div>
+            <div class="menu-item-price">$3.50</div>
+          </div>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Americano</div><div class="menu-item-desc">Espresso with hot water</div></div>
+            <div class="menu-item-price">$4.00</div>
+          </div>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Cappuccino</div><div class="menu-item-desc">Equal parts espresso, steamed milk & foam</div></div>
+            <div class="menu-item-price">$5.00</div>
+          </div>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Latte</div><div class="menu-item-desc">Espresso with velvety steamed milk</div></div>
+            <div class="menu-item-price">$5.50</div>
+          </div>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Flat White</div><div class="menu-item-desc">Double ristretto with microfoam</div></div>
+            <div class="menu-item-price">$5.50</div>
+          </div>
+        </div>
+
+        <!-- Specialty -->
+        <div class="menu-category">
+          <h3 class="menu-category-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/></svg>
+            Specialty
+          </h3>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Caramel Macchiato</div><div class="menu-item-desc">Vanilla, steamed milk & caramel drizzle</div></div>
+            <div class="menu-item-price">$6.00</div>
+          </div>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Mocha</div><div class="menu-item-desc">Espresso, chocolate & steamed milk</div></div>
+            <div class="menu-item-price">$6.00</div>
+          </div>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Vanilla Latte</div><div class="menu-item-desc">Latte with house-made vanilla syrup</div></div>
+            <div class="menu-item-price">$6.00</div>
+          </div>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Lavender Oat Latte</div><div class="menu-item-desc">Lavender syrup with oat milk</div></div>
+            <div class="menu-item-price">$6.50</div>
+          </div>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Honey Cinnamon Latte</div><div class="menu-item-desc">Raw honey & cinnamon spice</div></div>
+            <div class="menu-item-price">$6.00</div>
+          </div>
+        </div>
+
+        <!-- Cold Drinks -->
+        <div class="menu-category">
+          <h3 class="menu-category-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v8M8 6l4 4 4-4M6 12h12l-1.5 10h-9L6 12z"/></svg>
+            Cold Drinks
+          </h3>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Iced Latte</div><div class="menu-item-desc">Espresso over ice with cold milk</div></div>
+            <div class="menu-item-price">$5.50</div>
+          </div>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Cold Brew</div><div class="menu-item-desc">18-hour steeped, smooth & rich</div></div>
+            <div class="menu-item-price">$5.00</div>
+          </div>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Iced Mocha</div><div class="menu-item-desc">Chocolate, espresso & milk over ice</div></div>
+            <div class="menu-item-price">$6.00</div>
+          </div>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Matcha Latte</div><div class="menu-item-desc">Ceremonial grade matcha, iced or hot</div></div>
+            <div class="menu-item-price">$6.00</div>
+          </div>
+        </div>
+
+        <!-- Non-Coffee -->
+        <div class="menu-category">
+          <h3 class="menu-category-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+            Non-Coffee
+          </h3>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Hot Chocolate</div><div class="menu-item-desc">Rich Belgian chocolate</div></div>
+            <div class="menu-item-price">$4.50</div>
+          </div>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Chai Latte</div><div class="menu-item-desc">Spiced chai with steamed milk</div></div>
+            <div class="menu-item-price">$5.00</div>
+          </div>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Fresh Lemonade</div><div class="menu-item-desc">House-squeezed with a hint of mint</div></div>
+            <div class="menu-item-price">$4.00</div>
+          </div>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Italian Soda</div><div class="menu-item-desc">Sparkling water with flavored syrup</div></div>
+            <div class="menu-item-price">$4.00</div>
+          </div>
+        </div>
+      </div>
+
+      <p style="text-align:center;margin-top:2rem;font-size:0.8rem;color:var(--text-muted);">
+        Oat, almond & coconut milk available &middot; Add flavor syrup +$0.75
+      </p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Events -->
+  <section id="events">
+    <div class="events-section">
+      <div class="events-content">
+        <div class="fade-up">
+          <span class="section-label">Book Us</span>
+          <h2 class="section-title">Your Event,<br>Our <span style="color:var(--gold);">Coffee</span></h2>
+          <p class="section-text">
+            Let ROAM Coffee Bike roll up to your next event. We handle everything from setup to service, creating a memorable coffee experience your guests will love.
+          </p>
+          <p class="section-text" style="margin-top:1rem;">
+            Custom menus, branded cups, and flexible packages available for events of any size.
+          </p>
+          <a href="#contact" class="hero-cta" style="margin-top:2.5rem;display:inline-flex;">
+            Get in Touch
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="event-types fade-up">
+          <div class="event-card">
+            <div class="event-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"/></svg>
+            </div>
+            <h3>Corporate Events</h3>
+            <p>Impress clients and energize your team with premium coffee service at your office, conference, or company gathering.</p>
+          </div>
+          <div class="event-card">
+            <div class="event-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </div>
+            <h3>Weddings & Parties</h3>
+            <p>Add a unique touch to your special day with our beautifully styled coffee bike and curated drink menu.</p>
+          </div>
+          <div class="event-card">
+            <div class="event-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM12 8v8M8 12h8"/></svg>
+            </div>
+            <h3>Markets & Festivals</h3>
+            <p>We thrive in the outdoor scene. Find us at local farmers markets, food festivals, and community events.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="contact-section fade-up">
+      <span class="section-label" style="padding-left:0;">Get in Touch</span>
+      <h2 class="section-title">Let's Talk Coffee</h2>
+      <p class="section-text" style="margin:0 auto;">
+        Ready to book ROAM Coffee Bike for your next event? Have a question about our menu? We'd love to hear from you.
+      </p>
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <h3>Phone</h3>
+          <a href="tel:+15551234567">(555) 123-4567</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+          </div>
+          <h3>Email</h3>
+          <a href="mailto:hello@roamcoffeebike.com">hello@roamcoffeebike.com</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3>Location</h3>
+          <p>Mobile &mdash; We come to you!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">ROAM <span>COFFEE</span> BIKE</div>
+    <p class="footer-text">&copy; 2026 Roam Coffee Bike. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // ── Physics-Based Floating Coffee Beans ──
+    (function() {
+      const container = document.getElementById('beansBg');
+      const W = window.innerWidth;
+      const H = window.innerHeight;
+
+      function beanSVG(size) {
+        return `<svg width="${size}" height="${size * 1.4}" viewBox="0 0 60 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="30" cy="42" rx="24" ry="36" stroke="#f5f0e8" stroke-width="2.2" fill="none"/>
+          <path d="M30 8 C24 22, 36 34, 30 42 C24 50, 36 62, 30 76" stroke="#f5f0e8" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M20 14 C17 26, 24 36, 22 46 C20 56, 24 66, 22 74" stroke="#f5f0e8" stroke-width="0.8" fill="none" opacity="0.4" stroke-linecap="round"/>
+          <path d="M40 14 C43 26, 36 36, 38 46 C40 56, 36 66, 38 74" stroke="#f5f0e8" stroke-width="0.8" fill="none" opacity="0.4" stroke-linecap="round"/>
+          <ellipse cx="24" cy="30" rx="5" ry="10" stroke="#f5f0e8" stroke-width="0.5" fill="none" opacity="0.2"/>
+        </svg>`;
+      }
+
+      const beans = [];
+      const count = 45;
+
+      for (let i = 0; i < count; i++) {
+        const size = 22 + Math.random() * 30;
+        const radius = size * 0.5;
+        const opacity = 0.06 + Math.random() * 0.1;
+
+        // Random direction — mostly up or down with a sideways component
+        const goUp = Math.random() > 0.5;
+        const vy = goUp ? -(0.15 + Math.random() * 0.3) : (0.15 + Math.random() * 0.3);
+        const vx = (-0.3 + Math.random() * 0.6);
+
+        const bean = {
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: vx,
+          vy: vy,
+          rot: Math.random() * 360,
+          vr: (-0.15 + Math.random() * 0.3),  // rotation speed
+          size: size,
+          radius: radius,
+          opacity: opacity,
+          el: null
+        };
+
+        const el = document.createElement('div');
+        el.style.cssText = `position:absolute;pointer-events:none;opacity:${opacity};will-change:transform;`;
+        el.innerHTML = beanSVG(size);
+        container.appendChild(el);
+        bean.el = el;
+        beans.push(bean);
+      }
+
+      function animate() {
+        const cw = window.innerWidth;
+        const ch = window.innerHeight;
+
+        // Update positions
+        for (let i = 0; i < beans.length; i++) {
+          const b = beans[i];
+          b.x += b.vx;
+          b.y += b.vy;
+          b.rot += b.vr;
+
+          // Wrap around edges seamlessly
+          if (b.x < -b.size) b.x = cw + b.size;
+          if (b.x > cw + b.size) b.x = -b.size;
+          if (b.y < -b.size) b.y = ch + b.size;
+          if (b.y > ch + b.size) b.y = -b.size;
+        }
+
+        // Collision detection — gentle push apart
+        for (let i = 0; i < beans.length; i++) {
+          for (let j = i + 1; j < beans.length; j++) {
+            const a = beans[i];
+            const b = beans[j];
+            const dx = b.x - a.x;
+            const dy = b.y - a.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const minDist = a.radius + b.radius + 8;
+
+            if (dist < minDist && dist > 0) {
+              // Normalize direction
+              const nx = dx / dist;
+              const ny = dy / dist;
+              const overlap = (minDist - dist) * 0.02;  // gentle push
+
+              // Push apart
+              a.vx -= nx * overlap;
+              a.vy -= ny * overlap;
+              b.vx += nx * overlap;
+              b.vy += ny * overlap;
+
+              // Dampen to prevent speeding up
+              const maxSpeed = 0.6;
+              const clamp = (v) => Math.max(-maxSpeed, Math.min(maxSpeed, v));
+              a.vx = clamp(a.vx);
+              a.vy = clamp(a.vy);
+              b.vx = clamp(b.vx);
+              b.vy = clamp(b.vy);
+            }
+          }
+        }
+
+        // Apply transforms
+        for (let i = 0; i < beans.length; i++) {
+          const b = beans[i];
+          b.el.style.transform = `translate(${b.x}px, ${b.y}px) rotate(${b.rot}deg)`;
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      requestAnimationFrame(animate);
+    })();
+
+    // Navbar scroll effect
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu
+    const toggle = document.getElementById('menuToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('open');
+      links.classList.toggle('open');
+    });
+    function closeMenu() {
+      toggle.classList.remove('open');
+      links.classList.remove('open');
+    }
+
+    // Fade-up on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
