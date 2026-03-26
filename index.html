@@ -34,9 +34,10 @@
 
 
     /* ── Scrollbar ── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--black); }
-    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+    /* Use native overlay scrollbars to avoid persistent gold stripe on load */
+    html { scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
+    ::-webkit-scrollbar { width: 0; background: transparent; }
+    ::-webkit-scrollbar-thumb { background: transparent; }
 
     /* ── Navigation ── */
     nav {
