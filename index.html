@@ -554,6 +554,105 @@
 
     .contact-item a:hover { color: var(--gold); }
 
+    /* ── Booking Form ── */
+    .booking-form {
+      max-width: 680px;
+      margin: 4rem auto 0;
+      text-align: left;
+    }
+
+    .booking-form h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      color: var(--cream);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      padding: 0.85rem 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group select option {
+      background: var(--dark);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 0.5rem;
+    }
+
+    .form-submit:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201, 169, 110, 0.25);
+    }
+
+    .form-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
     /* ── Footer ── */
     footer {
       padding: 3rem 2rem;
@@ -869,6 +968,55 @@
           <p>Mobile &mdash; We come to you!</p>
         </div>
       </div>
+
+      <!-- Booking Form -->
+      <form class="booking-form fade-up" name="booking" action="mailto:hello@roamcoffeebike.com" method="POST" enctype="text/plain">
+        <h3>Request a Booking</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">Your Name</label>
+            <input type="text" id="fname" name="name" placeholder="Jane Smith" required>
+          </div>
+          <div class="form-group">
+            <label for="femail">Email Address</label>
+            <input type="email" id="femail" name="email" placeholder="jane@example.com" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fphone">Phone Number</label>
+            <input type="tel" id="fphone" name="phone" placeholder="(555) 000-0000">
+          </div>
+          <div class="form-group">
+            <label for="fdate">Event Date</label>
+            <input type="date" id="fdate" name="date">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="ftype">Event Type</label>
+            <select id="ftype" name="event_type">
+              <option value="">Select one…</option>
+              <option>Wedding</option>
+              <option>Corporate Event</option>
+              <option>Farmers Market / Festival</option>
+              <option>Private Party</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fguests">Estimated Guests</label>
+            <input type="number" id="fguests" name="guests" placeholder="e.g. 100" min="1">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="fmessage">Tell Us About Your Event</label>
+          <textarea id="fmessage" name="message" placeholder="Location, time, any special requests…"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Booking Request →</button>
+        <p class="form-note">We'll get back to you within 24 hours.</p>
+      </form>
+
     </div>
   </section>
 
