@@ -164,15 +164,14 @@
 
     .hero-tagline {
       font-family: 'Nunito', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 300;
+      font-size: 1.05rem;
+      font-weight: 600;
       color: var(--warm-white);
       max-width: 420px;
-      margin: 0 auto 3rem;
-      line-height: 1.8;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      opacity: 0.65;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+      letter-spacing: 1px;
+      opacity: 0.85;
     }
 
     .hero-cta {
@@ -204,6 +203,43 @@
     }
 
     .hero-cta:hover svg { transform: translateX(4px); }
+
+    .hero-cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2.5rem;
+      background: transparent;
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: 1px solid rgba(245, 240, 232, 0.35);
+      transition: all 0.3s;
+    }
+
+    .hero-cta-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-location {
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 2rem;
+    }
 
     .scroll-indicator {
       position: absolute;
@@ -616,11 +652,15 @@
 
       <!-- ROAM COFFEE Logo -->
       <img src="roam-coffee-logo-clean.png" alt="ROAM Coffee Bike Logo" class="hero-logo">
-      <p class="hero-tagline">Premium mobile coffee, brewed with passion. We bring the cafe experience to your doorstep, event, or celebration.</p>
-      <a href="#events" class="hero-cta">
-        Book Us
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+      <p class="hero-tagline">Café-quality coffee. Delivered to your event.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="hero-cta">
+          Book ROAM for Your Event
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#menu" class="hero-cta-secondary">See Our Menu</a>
+      </div>
+      <p class="hero-location">Serving Southwest Michigan</p>
     </div>
     <div class="scroll-indicator">
       <span>Scroll</span>
