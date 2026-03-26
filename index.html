@@ -22,7 +22,12 @@
       --border: #2a2a2a;
     }
 
-    html { scroll-behavior: smooth; background: var(--black); }
+    html {
+      scroll-behavior: smooth;
+      background: var(--black);
+      overflow-x: hidden;
+      scrollbar-width: none; /* Hides scrollbar in Firefox + Chrome 121+ */
+    }
 
     body {
       font-family: 'Nunito', -apple-system, sans-serif;
@@ -32,12 +37,8 @@
       -webkit-font-smoothing: antialiased;
     }
 
-
-    /* ── Scrollbar ── */
-    /* Use native overlay scrollbars to avoid persistent gold stripe on load */
-    html { scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
-    ::-webkit-scrollbar { width: 0; background: transparent; }
-    ::-webkit-scrollbar-thumb { background: transparent; }
+    /* ── Scrollbar: fully hidden to prevent gold stripe on load ── */
+    ::-webkit-scrollbar { display: none; }
 
     /* ── Navigation ── */
     nav {
